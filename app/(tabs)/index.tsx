@@ -11,9 +11,11 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useRouter } from 'expo-router';
+import { useBlogContext } from '../BlogContext';
 
 export default function BlogsScreen() {
   const router = useRouter();
+  const { refresh, setRefresh } = useBlogContext();
 
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -34,7 +36,7 @@ export default function BlogsScreen() {
     };
 
     fetchBlogs();
-  }, []);
+  }, [refresh]);
 
   if (loading) {
     return (
@@ -69,9 +71,17 @@ export default function BlogsScreen() {
         <IconSymbol size={310} color="#808080" name="newspaper.fill" />
       }
     >
-      <ThemedText style={{ padding: 16 }} type="title">
-        Blogs
-      </ThemedText>
+      <View style={styles.header}>
+        <ThemedText style={styles.headerText} type="title">
+          Blogs
+        </ThemedText>
+        <TouchableOpacity
+          style={styles.createButton}
+          onPress={() => router.push('/create-blog')}
+        >
+          <Text style={styles.createButtonText}>Create Blog +</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.listContainer}>
         {blogs.map((item: any) => (
           <TouchableOpacity
@@ -119,5 +129,27 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#666',
     lineHeight: 22,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  createButton: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+  },
+  createButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
