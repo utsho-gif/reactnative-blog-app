@@ -25,6 +25,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="create-user"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
         name="users"
         options={{
           title: 'Users',

@@ -16,13 +16,15 @@ import { ThemedText } from '@/components/ThemedText';
 import api from '@/app/utils/api';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useBlogContext } from '../BlogContext';
 
 export default function UsersScreen() {
+  const router = useRouter();
+  const { refresh, setRefresh } = useBlogContext();
+
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const router = useRouter();
-  const screenHeight = Dimensions.get('window').height;
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -38,7 +40,7 @@ export default function UsersScreen() {
     };
 
     fetchUsers();
-  }, []);
+  }, [refresh]);
 
   const renderUserCard = (user: any) => (
     <TouchableOpacity
@@ -103,7 +105,7 @@ export default function UsersScreen() {
 
           <TouchableOpacity
             style={styles.createButton}
-            onPress={() => router.push('/create-blog')}
+            onPress={() => router.push('/create-user')}
           >
             <MaterialIcons name="person-add" size={20} color="#fff" />
             <Text style={styles.createButtonText}>Add User</Text>

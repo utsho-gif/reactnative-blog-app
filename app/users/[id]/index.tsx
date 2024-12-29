@@ -24,6 +24,7 @@ interface UserDetails {
 export default function UserDetailsScreen() {
   const { id } = useLocalSearchParams();
   const navigation = useNavigation();
+
   const [user, setUser] = useState<UserDetails | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
