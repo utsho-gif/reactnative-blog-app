@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -8,13 +8,14 @@ import {
   Alert,
   ScrollView,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useNavigation, useRouter } from 'expo-router';
 import api from '../utils/api';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { EventEmitter } from 'events';
 import { useBlogContext } from '../BlogContext';
 
 export default function BlogCreateScreen() {
+  const navigation = useNavigation();
   const router = useRouter();
   const { setRefresh } = useBlogContext();
 
@@ -50,6 +51,10 @@ export default function BlogCreateScreen() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    navigation.setOptions({ title: 'Create Blog' });
+  }, [navigation]);
 
   return (
     <SafeAreaView style={styles.container}>
