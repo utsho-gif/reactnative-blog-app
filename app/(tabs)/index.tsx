@@ -15,6 +15,7 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import { useRouter } from 'expo-router';
 import { useBlogContext } from '../BlogContext';
 import { MaterialIcons } from '@expo/vector-icons';
+import axios from 'axios';
 
 interface Blog {
   _id: string;
@@ -39,7 +40,7 @@ export default function BlogsScreen() {
         setBlogs(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching blogs:', error);
+        console.error('Error fetching blogs:', JSON.stringify(error));
         setError('Failed to load blogs. Please try again later.');
       } finally {
         setLoading(false);

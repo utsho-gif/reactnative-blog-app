@@ -12,6 +12,8 @@
       "supportsTablet": true
     },
     "android": {
+      "usesCleartextTraffic": true,
+      "permissions": ["android.permission.INTERNET"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -39,6 +41,7 @@
       "typedRoutes": true
     },
     "extra": {
+      "apiBaseURL": "https://blogginapptest.ddns.net/",
       "router": {
         "origin": false
       },
